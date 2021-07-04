@@ -47,7 +47,6 @@ router.post(
 
 //logout
 router.get("/logout", authController.logout);
-module.exports = router;
 
 // account
 router.get("/account", authController.isLoggedIn, userController.account);
@@ -61,3 +60,8 @@ router.post(
   authController.confirmPasswords,
   authController.update
 );
+
+// API
+router.get("/api/search", catchErrors(StoreController.searchStores));
+
+module.exports = router;

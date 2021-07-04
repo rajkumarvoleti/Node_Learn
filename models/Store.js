@@ -36,6 +36,16 @@ const StoreSchema = new mongoose.Schema({
     },
   },
   photo: String,
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: "You must supply an author",
+  },
+});
+
+StoreSchema.index({
+  name: "text",
+  description: "text",
 });
 
 StoreSchema.pre("save", async function (next) {
