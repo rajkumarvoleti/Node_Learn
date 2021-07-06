@@ -108,7 +108,7 @@ exports.getStoreBySlug = async (req, res, next) => {
 // tag
 exports.getStoreByTag = async (req, res) => {
   const tag = req.params.tag;
-  const tagQuery = tag || { $exit: true, $ne: [] };
+  const tagQuery = tag || { $exists: true, $ne: [] };
 
   const tagsPromise = Store.getTagsList();
   const storesPromise = Store.find({ tags: tagQuery });
@@ -132,5 +132,25 @@ exports.searchStores = async (req, res) => {
       score: { $meta: "textScore" },
     })
     .limit(5);
+  res.json(stores);
+};
+
+exports.mapStores = async (req, res) => {
+  const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+  const q = {
+    location: {
+      $near: {
+        $geometry: {
+          type: "Point",
+          coordinates,
+        },
+        $maxDistance: 10000, // 10km
+      },
+    },
+  };
+
+  const stores = await Store.find(q)
+    .select("name slug description location")
+    .linit(10);
   res.json(stores);
 };

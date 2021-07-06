@@ -48,6 +48,10 @@ StoreSchema.index({
   description: "text",
 });
 
+StoreSchema.index({
+  location: "2dsphere",
+});
+
 StoreSchema.pre("save", async function (next) {
   if (!this.isModified("name")) return next();
   // else
