@@ -69,6 +69,25 @@ app.use((req, res, next) => {
 });
 
 // After allllll that above middleware, we finally handle our own routes!
+// axios
+
+// const cors = require("cors");
+// app.use(require("cors")());
+
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", [
+//     "http://localhost:7777",
+//     "http://localhost:7777/api/stores/near",
+//   ]); // update to match the domain you will make the request from
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+
+// ["http://localhost:7777", "http://localhost:7777/api/stores/near"]
+
 app.use("/", routes);
 
 // If that above routes didnt work, we 404 them and forward to error handler

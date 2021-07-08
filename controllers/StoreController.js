@@ -151,6 +151,12 @@ exports.mapStores = async (req, res) => {
 
   const stores = await Store.find(q)
     .select("name slug description location")
-    .linit(10);
+    .limit(10);
   res.json(stores);
+};
+
+exports.mapPage = (req, res) => {
+  console.log(res.data);
+  res.render("map", { title: "Map" });
+  // res.json(res.data);
 };
