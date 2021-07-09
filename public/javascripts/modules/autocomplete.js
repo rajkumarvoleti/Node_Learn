@@ -13,10 +13,7 @@ function autocomplete(input, locations, latInput, lngInput) {
     if (!input || input.value.length < 3) return;
     locations.innerHTML = "";
     const finalUrl =
-      url +
-      input.value +
-      ".json?autocomplete=true&types=address&autocomplete&access_token=" +
-      token;
+      url + input.value + ".json?autocomplete=true&access_token=" + token;
     https.get(finalUrl, (response) => {
       // extracting data
       let data = "";

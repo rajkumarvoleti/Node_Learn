@@ -12687,7 +12687,7 @@ function autocomplete(input, locations, latInput, lngInput) {
   function getRequest() {
     if (!input || input.value.length < 3) return;
     locations.innerHTML = "";
-    var finalUrl = url + input.value + ".json?autocomplete=true&types=address&autocomplete&access_token=" + token;
+    var finalUrl = url + input.value + ".json?autocomplete=true&access_token=" + token;
     https.get(finalUrl, function (response) {
       // extracting data
       var data = "";
@@ -12778,11 +12778,14 @@ var _mapboxGl2 = _interopRequireDefault(_mapboxGl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+// var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
+
+
 function loadPlaces(map) {
   var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 43.26;
   var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -79.8665;
 
-  console.log("Hello");
   _axios2.default.get("api/stores/near?lat=" + lat + "&lng=" + lng).then(function (res) {
     var places = res.data;
     if (!places.length) {
@@ -12790,30 +12793,50 @@ function loadPlaces(map) {
       return;
     }
 
+    // markers
     var markers = places.map(function (place) {
       var coordinates = place.location.coordinates;
       var marker = new _mapboxGl2.default.Marker().setLngLat(coordinates).addTo(map);
       marker.place = place;
       return marker;
     });
+
+    // boundingBox
+    var longitudes = places.map(function (place) {
+      var coordinates = place.location.coordinates;
+      return coordinates[0];
+    });
+    var latitudes = places.map(function (place) {
+      var coordinates = place.location.coordinates;
+      return coordinates[1];
+    });
+    var southWest = [Math.min.apply(Math, _toConsumableArray(longitudes)), Math.min.apply(Math, _toConsumableArray(latitudes)) * 0.9999];
+    var northEast = [Math.max.apply(Math, _toConsumableArray(longitudes)), Math.max.apply(Math, _toConsumableArray(latitudes)) * 1.0001];
+    map.fitBounds([southWest, northEast]);
   });
 }
-// var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-
 
 function makeMap(mapDiv) {
   if (!mapDiv) return;
 
   var lat = 43.26;
   var lng = -79.8665;
+
   // making a map
   _mapboxGl2.default.accessToken = "pk.eyJ1IjoicmFqa3VtYXJ2b2xldGkiLCJhIjoiY2txZ3g0MmhiMDIxdjJxbzlvOWU1MmxzZSJ9.EHpoUjeCR0T9tsPryJ1xrA";
   var map = new _mapboxGl2.default.Map({
     container: "map", // container ID
     style: "mapbox://styles/mapbox/streets-v11", // style URL
-    center: [lng, lat], // starting position [lng, lat]
-    zoom: 12 // starting zoom
+    center: [lng, lat] // starting position [lng, lat]
   });
+
+  // autocomplete
+  var geocoder = new MapboxGeocoder({
+    accessToken: _mapboxGl2.default.accessToken,
+    mapboxgl: _mapboxGl2.default
+  });
+  if (document.getElementById("geocoder")) document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
+
   loadPlaces(map, lat, lng);
 }
 
