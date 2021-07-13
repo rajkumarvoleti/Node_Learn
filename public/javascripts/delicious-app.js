@@ -1,5 +1,5 @@
 import "../sass/style.scss";
-
+import "regenerator-runtime/runtime";
 import { $, $$ } from "./modules/bling";
 import autocomplete from "./modules/autocomplete";
 import typeAhead from "./modules/typeAhead";

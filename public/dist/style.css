@@ -553,6 +553,9 @@ label {
 .none {
   opacity: 50%; }
 
+.mapboxgl-popup, .mapboxgl-popup-anchor-top {
+  max-width: none !important; }
+
 @keyframes slideIn {
   0% {
     transform: translateX(-10px); }

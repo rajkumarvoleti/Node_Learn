@@ -2,22 +2,40 @@ import axios from "axios";
 // var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
 import mapboxgl from "!mapbox-gl";
 
-function loadPlaces(map, lat = 43.26, lng = -79.8665) {
+function loadPlaces(map, lat, lng) {
   axios.get(`api/stores/near?lat=${lat}&lng=${lng}`).then((res) => {
     const places = res.data;
     if (!places.length) {
-      alert("No places found");
+      alert("No stores found at that places");
       return;
     }
 
     // markers
     const markers = places.map((place) => {
       const coordinates = place.location.coordinates;
-      const marker = new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
+
+      //popup
+      const html = `
+      <div class="popup">
+      <a href="/store/${place.slug}">
+        <img src="/uploads/${place.photo || "store.png"}" alt="${place.name}"/>
+        <p>${place.name} - ${place.location.address}</p>
+      </a>
+    </div>
+      `;
+      const popup = new mapboxgl.Popup().setHTML(html).addTo(map);
+      map.on("closeAllPopups", () => {
+        popup.remove();
+      });
+
+      const marker = new mapboxgl.Marker()
+        .setLngLat(coordinates)
+        .addTo(map)
+        .setPopup(popup);
       marker.place = place;
       return marker;
     });
-
+    map.fire("closeAllPopups");
     // boundingBox
     var longitudes = places.map((place) => {
       const coordinates = place.location.coordinates;
@@ -36,8 +54,8 @@ function loadPlaces(map, lat = 43.26, lng = -79.8665) {
 function makeMap(mapDiv) {
   if (!mapDiv) return;
 
-  const lat = 43.26;
-  const lng = -79.8665;
+  var lat = 43.26;
+  var lng = -79.8665;
 
   // making a map
   mapboxgl.accessToken =
@@ -53,10 +71,16 @@ function makeMap(mapDiv) {
     accessToken: mapboxgl.accessToken,
     mapboxgl: mapboxgl,
   });
-  if (document.getElementById("geocoder"))
-    document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
-
+  const geoDiv = document.getElementById("geocoder");
+  if (geoDiv) geoDiv.appendChild(geocoder.onAdd(map));
+  // options
   loadPlaces(map, lat, lng);
+  geocoder.on("result", function (e) {
+    const coordinates = e.result.geometry.coordinates;
+    lng = coordinates[0];
+    lat = coordinates[1];
+    loadPlaces(map, lat, lng);
+  });
 }
 
 export default makeMap;

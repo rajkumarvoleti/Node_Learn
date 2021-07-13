@@ -9,12 +9,12 @@ function autocomplete(input, locations, latInput, lngInput) {
   const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/`;
 
   //request
-  function getRequest() {
+  async function getRequest() {
     if (!input || input.value.length < 3) return;
     locations.innerHTML = "";
     const finalUrl =
-      url + input.value + ".json?autocomplete=true&access_token=" + token;
-    https.get(finalUrl, (response) => {
+      url + input.value + ".json?autocomplete&access_token=" + token;
+    await https.get(finalUrl, (response) => {
       // extracting data
       let data = "";
       response.on("data", (chunk) => {
@@ -30,7 +30,7 @@ function autocomplete(input, locations, latInput, lngInput) {
               return city.place_name;
             })
           : [];
-        for (let i = 0; i < options.length; i++) {
+        for (let i = 0; i < options.length && i < 6; i++) {
           const option = options[i];
           var node = document.createElement("option");
           var text = document.createTextNode(option);

@@ -38,3 +38,7 @@
 .none{
   opacity: 50%;
 }
+
+.mapboxgl-popup,.mapboxgl-popup-anchor-top{
+  max-width: none !important;
+}
