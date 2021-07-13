@@ -62,11 +62,19 @@ router.post(
   authController.update
 );
 
-// API
-router.get("/api/search", catchErrors(StoreController.searchStores));
-
 //map
 router.get("/map", StoreController.mapPage);
+
+// heart
+router.get(
+  "/hearts",
+  authController.isLoggedIn,
+  catchErrors(StoreController.getHearts)
+);
+
+// API
+router.get("/api/search", catchErrors(StoreController.searchStores));
 router.get("/api/stores/near", catchErrors(StoreController.mapStores));
+router.post("/api/stores/:id/heart", catchErrors(StoreController.heartStore));
 
 module.exports = router;

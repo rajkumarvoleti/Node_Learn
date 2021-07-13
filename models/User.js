@@ -20,6 +20,7 @@ const UserSchema = new Schema({
     required: "Please supply a name",
     trim: true,
   },
+  hearts: [{ type: mongoose.Schema.ObjectId, ref: "Store" }],
   resetPasswordToken: String,
   resetPasswordExpires: Date,
 });
