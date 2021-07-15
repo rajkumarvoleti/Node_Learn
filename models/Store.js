@@ -83,12 +83,62 @@ StoreSchema.statics.getTagsList = function () {
   ]);
 };
 
+StoreSchema.statics.getTop = function () {
+  // aggregate is like find but for complex quiries
+  return this.aggregate([
+    // Lookup Stores and populate their reviews
+    // mongodb takes our model name "Review" lowercase's it and add's an 's' at the end.so then we get 'reviews'
+    {
+      $lookup: {
+        from: "reviews",
+        localField: "_id",
+        foreignField: "store",
+        as: "reviews",
+      },
+    },
+    // Filter for only items that have 2 or more reviews
+    {
+      // reviews.1 means reviews with index 1 i.e, reviews that have more than 1 review will be selected
+      $match: { "reviews.1": { $exists: true } },
+    },
+    // Add the average reviews field
+    // project adds a new field
+    {
+      // project rewrites every field
+      // "$$ROOT" gives us the root object
+      $project: {
+        photo: "$$ROOT.photo",
+        slug: "$$ROOT.slug",
+        name: "$$ROOT.name",
+        reviews: "$$ROOT.reviews",
+        averageRating: { $avg: "$reviews.rating" },
+      },
+    },
+    // sort it by our new field , highest reviews first
+    {
+      $sort: { averageRating: -1 },
+    },
+    // limit to atmost 10
+    {
+      $limit: 10,
+    },
+  ]);
+};
+
 // find reviews where the stores _id === reviews store property
 StoreSchema.virtual("reviews", {
   ref: "Review", // what model to link
   localField: "_id", // which field on store
-  foreignField: "store" // which field on review
+  foreignField: "store", // which field on review
   // _id feild on the StoreSchema should match with store field on ReviewSchema
 });
+
+function autopopulate(next) {
+  this.populate("reviews");
+  next();
+}
+
+StoreSchema.pre("find", autopopulate);
+StoreSchema.pre("findOne", autopopulate);
 
 module.exports = mongoose.model("Store", StoreSchema);
