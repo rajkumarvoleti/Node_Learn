@@ -60,6 +60,7 @@ function makeMap(mapDiv) {
   // making a map
   mapboxgl.accessToken =
     "pk.eyJ1IjoicmFqa3VtYXJ2b2xldGkiLCJhIjoiY2txZ3g0MmhiMDIxdjJxbzlvOWU1MmxzZSJ9.EHpoUjeCR0T9tsPryJ1xrA";
+  console.log(process.env);
   var map = new mapboxgl.Map({
     container: "map", // container ID
     style: "mapbox://styles/mapbox/streets-v11", // style URL

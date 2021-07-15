@@ -9,6 +9,7 @@ const reviewController = require("../controllers/reviewController");
 // Do work here
 router.get("/", StoreController.getStore);
 router.get("/stores", StoreController.getStore);
+router.get("/stores/page/:page", StoreController.getStore);
 router.get("/add", authController.isLoggedIn, StoreController.addStore);
 
 router.post(

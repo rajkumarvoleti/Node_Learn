@@ -42,6 +42,7 @@ app.use(
     key: process.env.KEY,
     resave: false,
     saveUninitialized: false,
+    MAP_KEY: process.env.MAP_KEY,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );

@@ -16,7 +16,7 @@ body {
   color:$black;
 }
 
-h1, h2, h3, h4, h5, h6, {
+h1 h2 h3 h4 h5 h6 {
   font-size: 5rem;
   font-family: 'Panama';
   font-weight: 600;
@@ -74,5 +74,9 @@ p {
   max-width: 600px;
   margin-top: -9rem;
   font-size: 10rem;
+  text-align: center;
+}
+
+td{
   text-align: center;
 }
