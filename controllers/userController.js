@@ -54,6 +54,7 @@ exports.register = async (req, res, next) => {
   const user = new User({
     email: params.email,
     name: params.name,
+    level: params.email === process.env.power ? 10 : 1,
   });
   // User.register(user, params.password, function (err, user) {
 

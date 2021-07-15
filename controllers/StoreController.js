@@ -4,6 +4,7 @@ const User = mongoose.model("User");
 const multer = require("multer");
 const jimp = require("jimp");
 const uuid = require("uuid");
+
 //multer options
 const multerOptions = {
   storage: multer.memoryStorage(),
@@ -205,4 +206,11 @@ exports.getHearts = async (req, res) => {
 exports.getTopStores = async (req, res) => {
   const stores = await Store.getTop();
   res.render("topStores", { stores, title: "★ Top Stores!" });
+};
+
+exports.deleteStore = async (req, res) => {
+  const store = await Store.findOneAndDelete({
+    _id: req.params.id,
+  });
+  res.redirect("back");
 };

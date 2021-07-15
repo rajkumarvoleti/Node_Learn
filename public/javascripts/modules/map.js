@@ -1,8 +1,8 @@
 import axios from "axios";
 // var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
 import mapboxgl from "!mapbox-gl";
-
 function loadPlaces(map, lat, lng) {
+  console.log("Hello");
   axios.get(`api/stores/near?lat=${lat}&lng=${lng}`).then((res) => {
     const places = res.data;
     if (!places.length) {

@@ -44,3 +44,21 @@
     left: 20px;
   }
 }
+.heart:hover > *{
+  cursor: pointer;
+}
+
+.delete{
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+.delete.black > * {
+  fill: grey;
+}
+.delete:hover > * {
+  fill: red;
+}
+.delete:hover{
+  cursor: pointer;
+}

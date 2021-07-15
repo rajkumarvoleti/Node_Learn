@@ -16,7 +16,6 @@ require("./handlers/passport");
 
 // create our Express app
 const app = express();
-
 // view engine setup
 app.set("views", path.join(__dirname, "views")); // this is the folder where we keep our pug files
 app.set("view engine", "pug"); // we use the engine pug, mustache or EJS work great too
@@ -70,24 +69,6 @@ app.use((req, res, next) => {
 });
 
 // After allllll that above middleware, we finally handle our own routes!
-// axios
-
-// const cors = require("cors");
-// app.use(require("cors")());
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", [
-//     "http://localhost:7777",
-//     "http://localhost:7777/api/stores/near",
-//   ]); // update to match the domain you will make the request from
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
-// ["http://localhost:7777", "http://localhost:7777/api/stores/near"]
 
 app.use("/", routes);
 

@@ -84,6 +84,10 @@ router.post(
 // top
 router.get("/top", catchErrors(StoreController.getTopStores));
 
+// delete
+router.post("/delete/:id/store", catchErrors(StoreController.deleteStore));
+router.post("/delete/:id/review", catchErrors(reviewController.deleteReview));
+
 // API
 router.get("/api/search", catchErrors(StoreController.searchStores));
 router.get("/api/stores/near", catchErrors(StoreController.mapStores));

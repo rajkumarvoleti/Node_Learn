@@ -13,6 +13,8 @@ const transport = nodemailer.createTransport({
   },
 });
 
+exports.vaiables = process.env;
+
 const generateHTML = (filename, options = {}) => {
   const html = pug.renderFile(
     `${__dirname}/../views/email/${filename}.pug`,

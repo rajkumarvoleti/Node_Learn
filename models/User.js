@@ -15,6 +15,10 @@ const UserSchema = new Schema({
     validate: [validator.isEmail, "Invalid Email Address"],
     required: "Please Supply an Email Address",
   },
+  level: {
+    type: Number,
+    default: 1,
+  },
   name: {
     type: String,
     required: "Please supply a name",

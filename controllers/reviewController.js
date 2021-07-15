@@ -9,3 +9,10 @@ exports.addReview = async (req, res) => {
   req.flash("success", "Review Saved");
   res.redirect("back");
 };
+
+exports.deleteReview = async (req, res) => {
+  const review = await Review.findOneAndDelete({
+    _id: req.params.id,
+  });
+  res.redirect("back");
+};
