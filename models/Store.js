@@ -2,46 +2,52 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 const slug = require("slugs");
 
-const StoreSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    timr: true,
-    required: "Please enter a store name!",
-  },
-  slug: String,
-  description: {
-    type: String,
-    trim: true,
-    required: "Please enter a description of the store!",
-  },
-  tags: [String],
-  created: {
-    type: Date,
-    default: Date.now,
-  },
-  location: {
-    type: {
+const StoreSchema = new mongoose.Schema(
+  {
+    name: {
       type: String,
-      default: "Point",
+      trim: true,
+      required: "Please enter a store name!",
     },
-    coordinates: [
-      {
-        type: Number,
-        required: "You must supply coordinates",
+    slug: String,
+    description: {
+      type: String,
+      trim: true,
+      required: "Please enter a description of the store!",
+    },
+    tags: [String],
+    created: {
+      type: Date,
+      default: Date.now,
+    },
+    location: {
+      type: {
+        type: String,
+        default: "Point",
       },
-    ],
-    address: {
-      type: String,
-      required: "You must supply an address",
+      coordinates: [
+        {
+          type: Number,
+          required: "You must supply coordinates",
+        },
+      ],
+      address: {
+        type: String,
+        required: "You must supply an address",
+      },
+    },
+    photo: String,
+    author: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: "You must supply an author",
     },
   },
-  photo: String,
-  author: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: "You must supply an author",
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 StoreSchema.index({
   name: "text",
@@ -76,5 +82,13 @@ StoreSchema.statics.getTagsList = function () {
     { $sort: { count: -1 } }, // count: 1 for ascending
   ]);
 };
+
+// find reviews where the stores _id === reviews store property
+StoreSchema.virtual("reviews", {
+  ref: "Review", // what model to link
+  localField: "_id", // which field on store
+  foreignField: "store" // which field on review
+  // _id feild on the StoreSchema should match with store field on ReviewSchema
+});
 
 module.exports = mongoose.model("Store", StoreSchema);
