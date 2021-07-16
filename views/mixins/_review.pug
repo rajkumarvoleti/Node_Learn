@@ -15,8 +15,7 @@ mixin review(review)
 
     if isAuthor || power
       .store__action.store__action--count
-        form(action=`/delete/${review.id}/review` method = "POST") 
-              button.delete.black(type="submit" name="delete")
-                != h.icon('delete')
+        button.delete.black(data-id=`${review._id}` data-name= "review")
+          != h.icon('delete')
   .review__body
     p= review.text

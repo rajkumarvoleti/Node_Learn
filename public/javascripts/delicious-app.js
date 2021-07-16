@@ -5,6 +5,7 @@ import autocomplete from "./modules/autocomplete";
 import typeAhead from "./modules/typeAhead";
 import makeMap from "./modules/map";
 import ajaxHeart from "./modules/heart";
+import Popup from "./modules/popup";
 
 autocomplete($("#address"), $("#locations"), $("#lat"), $("#lng"));
 
@@ -13,4 +14,9 @@ typeAhead($(".search"));
 makeMap($("#map"));
 
 const heartForms = $$("form.heart");
-heartForms.on('submit',ajaxHeart);  
+heartForms.on("submit", ajaxHeart);
+
+const crossMarks = document.querySelectorAll(".delete");
+crossMarks.forEach((cross) => {
+  cross.addEventListener("click", Popup);
+});

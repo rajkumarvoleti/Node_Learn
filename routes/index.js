@@ -5,7 +5,6 @@ const { catchErrors } = require("../handlers/errorHandlers");
 const userController = require("../controllers/userController");
 const authController = require("../controllers/authController");
 const reviewController = require("../controllers/reviewController");
-
 // Do work here
 router.get("/", StoreController.getStore);
 router.get("/stores", StoreController.getStore);

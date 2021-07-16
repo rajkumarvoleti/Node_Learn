@@ -4,6 +4,7 @@ const User = mongoose.model("User");
 const multer = require("multer");
 const jimp = require("jimp");
 const uuid = require("uuid");
+const swal = require("sweetalert");
 
 //multer options
 const multerOptions = {
@@ -206,6 +207,11 @@ exports.getHearts = async (req, res) => {
 exports.getTopStores = async (req, res) => {
   const stores = await Store.getTop();
   res.render("topStores", { stores, title: "★ Top Stores!" });
+};
+
+exports.popup = async (req, res, next) => {
+  res.render("popup");
+  return next();
 };
 
 exports.deleteStore = async (req, res) => {
