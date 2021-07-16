@@ -36,6 +36,7 @@ router.get("/login", userController.loginForm);
 router.post("/login", authController.login);
 
 router.get("/register", userController.registerForm);
+router.get("/register/otp", userController.otpForm);
 
 // 1.Validate the registration data
 // 2. Register the user

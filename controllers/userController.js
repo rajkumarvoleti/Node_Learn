@@ -10,6 +10,10 @@ exports.registerForm = (req, res) => {
   res.render("register", { title: "Register" });
 };
 
+exports.otpForm = (req, res) => {
+  res.render("otp");
+};
+
 exports.validateRegister = (req, res, next) => {
   // name
   req.checkBody("name", "You must supply a name!").notEmpty();
@@ -62,6 +66,9 @@ exports.register = async (req, res, next) => {
   const register = promisify(User.register, User);
   await register(user, params.password);
   next();
+};
+exports.otpForm = (req, res) => {
+  res.render("otp");
 };
 
 exports.account = (req, res) => {

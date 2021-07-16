@@ -1156,4 +1156,35 @@ pre.error {
   line-height: 3;
   white-space: pre-line; }
 
+.OTP__form {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.OTP__head {
+  text-align: center; }
+
+.OTP__input {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  padding: 0;
+  font-size: 40px;
+  font-weight: 200;
+  text-align: center; }
+
+.OTP__submit {
+  margin-top: 20px;
+  width: 150px; }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
 /*# sourceMappingURL=style.css.map*/

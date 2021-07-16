@@ -96,3 +96,4 @@ exports.update = async (req, res) => {
   req.flash("success", "Your password has been reset");
   res.redirect("/");
 };
+

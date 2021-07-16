@@ -33064,6 +33064,10 @@ var _popup = __webpack_require__(67);
 
 var _popup2 = _interopRequireDefault(_popup);
 
+var _otp = __webpack_require__(168);
+
+var _otp2 = _interopRequireDefault(_otp);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _autocomplete2.default)((0, _bling.$)("#address"), (0, _bling.$)("#locations"), (0, _bling.$)("#lat"), (0, _bling.$)("#lng"));
@@ -33079,6 +33083,64 @@ var crossMarks = document.querySelectorAll(".delete");
 crossMarks.forEach(function (cross) {
   cross.addEventListener("click", _popup2.default);
 });
+
+(0, _otp2.default)();
+
+/***/ }),
+/* 167 */,
+/* 168 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _bling = __webpack_require__(30);
+
+function otpForm() {
+  var inputs = (0, _bling.$$)(".OTP__input");
+  var parent = (0, _bling.$)(".OTP__input__container");
+  var invalidChars = ["-", "+", "e", "."];
+
+  inputs.on("keydown", function (e) {
+    // helper variables
+    var key = e.key;
+    var keyCode = e.keyCode;
+    var length = this.value.length;
+    var dataPrev = this.dataset.prev;
+    var dataNext = this.dataset.next;
+
+    // invalid
+    if (invalidChars.includes(key)) {
+      e.preventDefault();
+    }
+
+    // change focus
+    if (keyCode === 37 && dataPrev !== "-1") {
+      var prevInput = (0, _bling.$)("*[data-name=\"" + dataPrev + "\"]");
+      prevInput.focus();
+      return;
+    }
+
+    // only one digit
+    if (length >= 0) {
+      e.preventDefault();
+      this.value = "";
+      this.value = key;
+    }
+
+    // change focus
+    if (dataNext !== "-1") {
+      var nextInput = (0, _bling.$)("*[data-name=\"" + dataNext + "\"]");
+      nextInput.focus();
+      return;
+    }
+  });
+}
+exports.default = otpForm;
 
 /***/ })
 /******/ ]);

@@ -6,6 +6,7 @@ import typeAhead from "./modules/typeAhead";
 import makeMap from "./modules/map";
 import ajaxHeart from "./modules/heart";
 import Popup from "./modules/popup";
+import otpForm from "./modules/otp";
 
 autocomplete($("#address"), $("#locations"), $("#lat"), $("#lng"));
 
@@ -20,3 +21,5 @@ const crossMarks = document.querySelectorAll(".delete");
 crossMarks.forEach((cross) => {
   cross.addEventListener("click", Popup);
 });
+
+otpForm();
