@@ -7,6 +7,7 @@ import makeMap from "./modules/map";
 import ajaxHeart from "./modules/heart";
 import Popup from "./modules/popup";
 import otpForm from "./modules/otp";
+import autoFill from "./modules/autoFill";
 
 autocomplete($("#address"), $("#locations"), $("#lat"), $("#lng"));
 
@@ -23,3 +24,13 @@ crossMarks.forEach((cross) => {
 });
 
 otpForm();
+
+autoFill();
+
+const loadDiv = document.querySelector(".loader-div");
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    loadDiv.style.display = "none";
+  }, 1000);
+});

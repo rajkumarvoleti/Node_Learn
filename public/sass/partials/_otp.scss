@@ -1,24 +1,28 @@
 .OTP__form{
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  max-width: 600px;
+  margin-bottom: 30px;
 }
-.OTP__head{
-  text-align: center;
-}
+
 .OTP__input{
-  width: 60px;
-  height: 60px;
+  width: 35px;
+  height: 35px;
   margin: 5px;
   padding: 0;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 200;
   text-align: center;
 }
 .OTP__submit{
-  margin-top: 20px;
-  width: 150px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.OTP__submit__button{
+  max-width: 200px;
 }
 
 input::-webkit-outer-spin-button,

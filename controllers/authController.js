@@ -2,8 +2,10 @@ const passport = require("passport");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const TempUser = mongoose.model("TempUser");
 const promisify = require("es6-promisify");
 const mail = require("../handlers/mail");
+const h = require("../helpers");
 
 exports.login = passport.authenticate("local", {
   failureRedirect: "/login",
@@ -26,6 +28,55 @@ exports.isLoggedIn = (req, res, next) => {
     req.flash("error", "Oops you must be logged in to do that !");
     res.redirect("/login");
   }
+};
+
+exports.sendOtp = async (req, res) => {
+  const email = req.body.email;
+  var otp = h.randomNumber(100000, 999999);
+  console.log("Otp2 is : " + otp);
+
+  // store otp
+  var user = await TempUser.findOne({ email });
+  var timeLeft = 1800000;
+  if (user) timeLeft = h.moment(user.time).valueOf() - Date.now() + 1800000;
+  // if otp doesn't expire
+  console.log("time Left is : " + timeLeft);
+  if (user && timeLeft > 0) {
+    otp = user.otp;
+    console.log("Otp2 is : " + otp);
+    req.flash(
+      "info",
+      `We have already sent an email. Please check your inbox. To resend the otp you need to wait for another ${Math.ceil(
+        h.moment.duration(timeLeft).asMinutes()
+      )} minutes.`
+    );
+    res.redirect("/register");
+    return;
+  }
+
+  // if otp expires
+  if (user && timeLeft < 0) {
+    user = await TempUser.findOneAndUpdate(
+      { email },
+      { email, otp, time: Date.now() },
+      {
+        new: true, // return's new instead of old one
+        runValidators: true,
+      }
+    ).exec();
+  }
+  // if there is no user
+  if (!user) user = await new TempUser({ email, otp }).save();
+
+  // send otp email
+  await mail.send({
+    email,
+    subject: "OTP",
+    otp,
+    filename: "emailOtp",
+  });
+  req.flash("success", "You have been emailed an OTP.");
+  res.redirect("/register");
 };
 
 exports.forgot = async (req, res) => {
@@ -96,4 +147,3 @@ exports.update = async (req, res) => {
   req.flash("success", "Your password has been reset");
   res.redirect("/");
 };
-

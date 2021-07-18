@@ -36,15 +36,15 @@ router.get("/login", userController.loginForm);
 router.post("/login", authController.login);
 
 router.get("/register", userController.registerForm);
-router.get("/register/otp", userController.otpForm);
 
 // 1.Validate the registration data
 // 2. Register the user
 // 3. We need to log them in
+router.post("/register/otp", catchErrors(authController.sendOtp));
 router.post(
   "/register",
   userController.validateRegister,
-  userController.register,
+  catchErrors(userController.register),
   authController.login
 );
 

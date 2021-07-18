@@ -31,7 +31,11 @@ function otpForm() {
       this.value = "";
       this.value = key;
     }
-
+    if (keyCode == 8 && dataPrev !== "-1") {
+      const prevInput = $(`*[data-name="${dataPrev}"]`);
+      prevInput.focus();
+      return;
+    }
     // change focus
     if (dataNext !== "-1") {
       const nextInput = $(`*[data-name="${dataNext}"]`);

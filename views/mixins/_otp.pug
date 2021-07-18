@@ -1,0 +1,12 @@
+mixin otp() 
+  .OTP__form
+    .OTP__input__container
+      input.OTP__input(type="number"  name = "number1" data-name="1" data-prev="-1" data-next="2")
+      input.OTP__input(type="number"  name = "number2" data-name="2" data-prev="1" data-next="3")
+      input.OTP__input(type="number"  name = "number3" data-name="3" data-prev="2" data-next="4")
+      span ---
+      input.OTP__input(type="number"  name = "number4" data-name="4" data-prev="3" data-next="5")
+      input.OTP__input(type="number"  name = "number5" data-name="5" data-prev="4" data-next="6")
+      input.OTP__input(type="number"  name = "number6" data-name="6" data-prev="5" data-next="-1")
+    .OTP__submit
+      input.button.OTP__submit__button(type="submit",formaction="/register/otp",value="Get Otp?")

@@ -115,7 +115,7 @@ exports.updateStore = async (req, res) => {
     `Successfully updated <strong>${store.name}</strong>. <a href ="/store/${store.slug}">View Store -></a>`
   );
   res.redirect(`/stores/${store._id}/edit`);
-  // redirect and tell them it workedf
+  // redirect and tell them it worked
 };
 
 exports.getStoreBySlug = async (req, res, next) => {

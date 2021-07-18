@@ -27,9 +27,13 @@ exports.send = async (options) => {
   const html = generateHTML(options.filename, options);
   const text = htmlToText.fromString(html);
   var client = new postmark.ServerClient(process.env.MAIL_KEY_POSTMARK);
+  
+  if (options.user) var email = options.user.email;
+  else var email = options.email;
+
   const mailOptions = {
     From: "511019099.voleti@students.iiests.ac.in",
-    To: options.user.email,
+    To: email,
     Subject: options.subject,
     HtmlBody: html,
     TextBody: text,

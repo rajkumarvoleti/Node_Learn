@@ -1156,35 +1156,113 @@ pre.error {
   line-height: 3;
   white-space: pre-line; }
 
+.disappear {
+  display: none; }
+
 .OTP__form {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  max-width: 600px;
+  margin-bottom: 30px; }
+
+.OTP__input {
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  padding: 0;
+  font-size: 30px;
+  font-weight: 200;
+  text-align: center; }
+
+.OTP__submit {
+  -ms-flex: 1;
+      flex: 1;
+  display: -ms-flexbox;
+  display: flex;
   -ms-flex-align: center;
       align-items: center;
   -ms-flex-pack: center;
       justify-content: center; }
 
-.OTP__head {
-  text-align: center; }
-
-.OTP__input {
-  width: 60px;
-  height: 60px;
-  margin: 5px;
-  padding: 0;
-  font-size: 40px;
-  font-weight: 200;
-  text-align: center; }
-
-.OTP__submit {
-  margin-top: 20px;
-  width: 150px; }
+.OTP__submit__button {
+  max-width: 200px; }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0; }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+.loader-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.452);
+  height: 100vh;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  z-index: 3; }
+
+.loader {
+  position: relative;
+  width: 15vw;
+  height: 10vw;
+  padding: 3vw;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.loader span {
+  position: absolute;
+  height: 1.5vw;
+  width: 1.5vw;
+  border-radius: 50%;
+  background-color: black; }
+
+.loader span:nth-child(1) {
+  animation: loading-dotsA 0.5s infinite linear; }
+
+.loader span:nth-child(2) {
+  animation: loading-dotsB 0.5s infinite linear; }
+
+@keyframes loading-dotsA {
+  0% {
+    transform: none; }
+  25% {
+    transform: translateX(4vw); }
+  50% {
+    transform: none; }
+  75% {
+    transform: translateY(4vw); }
+  100% {
+    transform: none; } }
+
+@keyframes loading-dotsB {
+  0% {
+    transform: none; }
+  25% {
+    transform: translateX(-4vw); }
+  50% {
+    transform: none; }
+  75% {
+    transform: translateY(-4vw); }
+  100% {
+    transform: none; } }
 
 /*# sourceMappingURL=style.css.map*/

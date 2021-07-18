@@ -29,3 +29,7 @@ exports.menu = [
   { slug: "/add", title: "Add", icon: "add" },
   { slug: "/map", title: "Map", icon: "map" },
 ];
+
+exports.randomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
