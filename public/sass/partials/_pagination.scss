@@ -26,4 +26,20 @@
     padding: 1rem;
     text-align: center;
   }
+  @media (max-width:800px) {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    &__text {
+      grid-row: 2/3;
+      grid-column: span 3;
+    }
+    &__prev{
+      grid-column: 1/2;
+    }
+    &__next{
+      grid-column-start: 3;
+      text-align: right;
+    }
+  }
 }
+

@@ -18,3 +18,8 @@
 @import 'partials/helpers';
 @import 'partials/otp';
 @import 'partials/load';
+
+body{
+  max-width: 100vw;
+  overflow-x: hidden;
+}
