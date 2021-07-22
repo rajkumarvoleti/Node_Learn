@@ -30,7 +30,7 @@
 
 ### In this Web Application, one can view, like and comment stores made by the others. One can also make his store and get reviews from the others. Users can also sort the stores based on tags or search for a particular store using the search feature. The top Stores (based on rating) are shown in the "TOP" section. Users can also search stores near their location using the "MAP" feature. All the liked stores are saved in the wishlist.
 
-![gif](video.gif)
+https://player.vimeo.com/video/578182490?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479
 
 <div id="features"></div>
 
