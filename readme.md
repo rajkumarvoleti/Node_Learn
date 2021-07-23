@@ -82,7 +82,5 @@ npm start
 
 - RajKumar Voleti - [@Linkdin](https://www.linkedin.com/in/rajkumar-voleti/) - voletirajkumar@gmail.com
 
-{"mode":"full","isActive":false}
-
 
 
