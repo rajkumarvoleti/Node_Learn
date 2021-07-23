@@ -30,11 +30,10 @@
 
 ### In this Web Application, one can view, like and comment stores made by the others. One can also make his store and get reviews from the others. Users can also sort the stores based on tags or search for a particular store using the search feature. The top Stores (based on rating) are shown in the "TOP" section. Users can also search stores near their location using the "MAP" feature. All the liked stores are saved in the wishlist.
 
-https://player.vimeo.com/video/578182490?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479
 
 <div id="features"></div>
 
-## Features
+<h2> Features</h2>
 
 - Like and Comment the Stores
 - Add your own Store/s
@@ -45,7 +44,7 @@ https://player.vimeo.com/video/578182490?badge=0&amp;autopause=0&amp;player_id=0
 
 <div id = "tech"></div>
 
-## Tech
+<h2> Tech </h2>
 
 - [pug] - FrontEnd
 - [SASS] - Styling
@@ -57,19 +56,19 @@ https://player.vimeo.com/video/578182490?badge=0&amp;autopause=0&amp;player_id=0
 
 <div id="installation">
 
-### Cloning
+<h2> Cloning </h2>
 
 ```sh
 git clone https://github.com/rajkumarvoleti/dang-thats-luscious.git
 ```
 
-### Install all required node modules and run the server
+<h3> Install all required node modules and run the server </h3>
 
 ```sh
 npm install
 ```
 
-### to run the app
+<h3> to run the app </h3>
 
 ```sh
 npm start
@@ -77,7 +76,7 @@ npm start
 
 <div id = "contact"></div>
 
-## Contact
+<h2> Contact </h2>
 
 - RajKumar Voleti - [@Linkdin](https://www.linkedin.com/in/rajkumar-voleti/) - voletirajkumar@gmail.com
 
